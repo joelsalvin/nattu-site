@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08091d">
+  <title>Nattu: a tiny robot for your desktop</title>
+  <meta name="description" content="A free desktop buddy for developers. Keeps an eye on Claude Code, your servers and your laptop. Runs on your computer.">
+  <meta property="og:title" content="Nattu: a tiny robot for your desktop">
+  <meta property="og:description" content="A free desktop buddy for developers. Keeps an eye on Claude Code, your servers and your laptop. Runs on your computer.">
+  <!-- TODO: Add og.png (Nattu in space) and point og:image to it. -->
+  <meta property="og:image" content="/og.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="nebula nebula-indigo" aria-hidden="true"></div>
+  <div class="nebula nebula-magenta" aria-hidden="true"></div>
+  <div class="nebula nebula-cyan" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Nattu home">
+      <span class="brand-bot" aria-hidden="true"><span></span><i></i><i></i></span>
+      <span>Nattu</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a class="nav-about" href="#about">About</a>
+      <a class="button button-primary nav-download" href="#download">Download</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-bot-wrap">
+          <div class="speech hero-speech" aria-live="polite" aria-atomic="true"><p id="hero-dialogue"></p></div>
+          <div class="nattu nattu-hero is-wave" data-mood="wave" role="img" aria-label="Nattu, a tiny friendly robot">
+            <span class="antenna"><i class="bulb"></i></span>
+            <span class="head"><span class="face"><i class="eye"></i><i class="eye"></i></span></span>
+            <span class="arm arm-left"></span><span class="arm arm-right"></span>
+            <span class="thruster"><i></i></span><span class="flight-trail"></span><span class="zzz">z</span>
+          </div>
+        </div>
+        <h1 class="hero-copy" id="hero-title">A tiny desktop buddy for developers. Free for Mac and Windows.</h1>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#download">Take me home</a>
+          <a class="button button-glass" href="#about">What do you do?</a>
+        </div>
+        <a class="scroll-hint" href="#about"><span aria-hidden="true">↓</span> Scroll to start my engines.</a>
+      </div>
+      <div class="hero-orbit" aria-hidden="true"></div>
+    </section>
+
+    <section class="journey" id="about" aria-labelledby="journey-title">
+      <div class="section-heading">
+        <h2 id="journey-title">What I do, one planet at a time.</h2>
+      </div>
+      <div class="route" aria-hidden="true">
+        <svg class="route-svg route-desktop" viewBox="0 0 1000 1200" preserveAspectRatio="none">
+          <path class="route-track" d="M500 0 C500 115 220 120 240 225 S760 300 740 410 S240 500 260 600 S760 690 740 800 S240 890 260 1000 S500 1080 500 1200"></path>
+          <path class="route-progress" d="M500 0 C500 115 220 120 240 225 S760 300 740 410 S240 500 260 600 S760 690 740 800 S240 890 260 1000 S500 1080 500 1200"></path>
+        </svg>
+        <svg class="route-svg route-mobile" viewBox="0 0 100 1200" preserveAspectRatio="none">
+          <path class="route-track" d="M50 0 C50 160 40 180 50 240 S60 420 50 480 S40 660 50 720 S60 900 50 960 S40 1100 50 1200"></path>
+          <path class="route-progress" d="M50 0 C50 160 40 180 50 240 S60 420 50 480 S40 660 50 720 S60 900 50 960 S40 1100 50 1200"></path>
+        </svg>
+      </div>
+      <div class="journey-bot nattu is-wave" aria-hidden="true">
+        <span class="antenna"><i class="bulb"></i></span>
+        <span class="head"><span class="face"><i class="eye"></i><i class="eye"></i></span></span>
+        <span class="arm arm-left"></span><span class="arm arm-right"></span>
+        <span class="thruster"><i></i></span><span class="flight-trail"></span><span class="zzz">z</span>
+      </div>
+
+      <article class="planet-stop stop-1" data-mood="jump">
+        <div class="planet-side"><div class="planet planet-claude" aria-hidden="true"></div><p class="planet-label">Planet Claude</p></div>
+        <div class="feature-card">
+          <span class="number">01</span><h3>Claude's done? I jump.</h3>
+          <p class="speech-line">“You went for tea. Claude finished 10 minutes ago. Not on my watch.”</p>
+          <p>Jumps when Claude Code finishes or needs your answer. Click Go to jump to its window. No Claude Code? I still work, just less jumpy.</p>
+        </div>
+      </article>
+      <article class="planet-stop stop-2" data-mood="worried">
+        <div class="planet-side"><div class="planet planet-localhost" aria-hidden="true"></div><p class="planet-label">Planet Localhost</p></div>
+        <div class="feature-card">
+          <span class="number">02</span><h3>Your server died. I noticed.</h3>
+          <p class="speech-line">“localhost:3000 stopped breathing. Was it Ctrl+C? I'm not judging. Okay, a little.”</p>
+          <p>Checks your dev servers every 5 seconds and your staging or live sites every minute. Tells you when they go down, and when they're back.</p>
+        </div>
+      </article>
+      <article class="planet-stop stop-3" data-mood="happy">
+        <div class="planet-side"><div class="planet planet-clipboard" aria-hidden="true"></div><p class="planet-label">Clipboard Moon</p></div>
+        <div class="feature-card">
+          <span class="number">03</span><h3>I remember what you copied.</h3>
+          <p class="speech-line">“That link you copied an hour ago and then overwrote? I kept it.”</p>
+          <p>Click any old copy to use it again. Passwords from password managers? I look away.</p>
+        </div>
+      </article>
+      <article class="planet-stop stop-4" data-mood="calm">
+        <div class="planet-side"><div class="planet planet-hydrate" aria-hidden="true"></div><p class="planet-label">Planet Hydrate</p></div>
+        <div class="feature-card">
+          <span class="number">04</span><h3>Drink water. I'm serious.</h3>
+          <p class="speech-line">“20 minutes of staring at code. Look at something far away. No, not the other monitor.”</p>
+          <p>Gentle nudges for water, eyes, posture and a short walk. They pause while you're away.</p>
+        </div>
+      </article>
+      <article class="planet-stop stop-5" data-mood="hot">
+        <div class="planet-side"><div class="planet planet-toasty" aria-hidden="true"></div><p class="planet-label">Planet Toasty</p></div>
+        <div class="feature-card">
+          <span class="number">05</span><h3>Your laptop is sweating. So am I.</h3>
+          <p class="speech-line">“CPU at 98% for 3 minutes. Something is stuck, and it's getting toasty in here.”</p>
+          <p>Warns once when your disk is almost full, the battery is low or the CPU is maxed out, then goes quiet once it's fixed.</p>
+        </div>
+      </article>
+      <article class="planet-stop stop-6" data-mood="feelings">
+        <div class="planet-side"><div class="planet planet-feelings" aria-hidden="true"></div><p class="planet-label">Planet Feelings</p></div>
+        <div class="feature-card">
+          <span class="number">06</span><h3>I have feelings. A few.</h3>
+          <p class="speech-line">“My eyes follow your mouse. I get sleepy at night. Shake me and I get dizzy. Please don't shake me.”</p>
+          <p>Try it: move your mouse around this page.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <div class="privacy-card glass-card">
+        <div class="privacy-bot nattu is-shades" aria-hidden="true">
+          <span class="antenna"><i class="bulb"></i></span>
+          <span class="head"><span class="face"><i class="eye"></i><i class="eye"></i><i class="shades"></i></span></span>
+          <span class="arm arm-left"></span><span class="arm arm-right"></span>
+          <span class="thruster"><i></i></span><span class="flight-trail"></span>
+        </div>
+        <div class="privacy-copy">
+          <h2 id="privacy-title">In space, no one can read your clipboard.</h2>
+          <p class="privacy-speech">“No account. No cloud. No tracking. I don't even know your name. Hi, stranger.”</p>
+          <ul class="privacy-list">
+            <li>Runs entirely on your computer</li>
+            <li>Your clipboard and settings never leave it</li>
+            <li>Only goes online to check the websites you ask me to watch</li>
+            <li>This website has no cookies either. Not even the chocolate kind.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing" id="download" aria-labelledby="download-title">
+      <div class="landing-bot nattu is-wave" aria-hidden="true">
+        <span class="antenna"><i class="bulb"></i></span>
+        <span class="head"><span class="face"><i class="eye"></i><i class="eye"></i></span></span>
+        <span class="arm arm-left"></span><span class="arm arm-right"></span>
+        <span class="landing-dust"></span>
+      </div>
+      <div class="horizon" aria-hidden="true"></div>
+      <div class="landing-content">
+        <div class="landing-heading">
+          <h2 id="download-title">Okay. Take me home.</h2>
+          <p>“Pick your computer and I'll land on it.”</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card glass-card" data-os="mac">
+            <span class="os-tag" hidden>You're probably here</span>
+            <div class="os-icon" aria-hidden="true">⌘</div>
+            <h3>Mac</h3>
+            <a class="button button-primary download-button" href="https://github.com/joelsalvin/nattu-downloads/releases/download/v1.0.1/Nattu-mac-arm64.1.dmg">Apple Silicon (M1 and newer)</a>
+            <a class="button button-glass download-button" href="https://github.com/joelsalvin/nattu-downloads/releases/download/v1.0.1/Nattu-mac-x64.1.dmg">Intel</a>
+            <p class="download-hint">Not sure? Apple menu → About This Mac. “Chip: Apple M…” means Apple Silicon.</p>
+          </article>
+          <article class="download-card glass-card" data-os="windows">
+            <span class="os-tag" hidden>You're probably here</span>
+            <div class="os-icon windows-icon" aria-hidden="true">⊞</div>
+            <h3>Windows</h3>
+            <a class="button button-primary download-button" href="https://github.com/joelsalvin/nattu-downloads/releases/latest/download/Nattu-Setup-x64.exe">Download for Windows 10 &amp; 11 (64-bit)</a>
+            <p class="download-hint">&nbsp;</p>
+          </article>
+        </div>
+        <aside class="disclaimer glass-card" aria-labelledby="disclaimer-title">
+          <div class="disclaimer-bot nattu is-worried" role="img" aria-label="Nattu looks a little worried">
+            <span class="antenna"><i class="bulb"></i></span>
+            <span class="head"><span class="face"><i class="eye"></i><i class="eye"></i></span></span>
+            <span class="arm arm-left"></span><span class="arm arm-right"></span>
+            <span class="thruster"><i></i></span><span class="flight-trail"></span>
+          </div>
+          <div>
+            <h3 id="disclaimer-title">Your computer will act suspicious. That's normal.</h3>
+            <p>Apps need a paid developer signature to be “trusted”. Apple wants $99 a year. I have $0 and two eyes. So the first time you open me:</p>
+            <p><strong>Mac:</strong> Open Nattu → click Done → System Settings → Privacy &amp; Security → Open Anyway</p>
+            <p><strong>Windows:</strong> “Windows protected your PC” → More info → Run anyway</p>
+            <p>You only do this once. I'm harmless. Look at this face.</p>
+          </div>
+        </aside>
+      </div>
+      <footer class="footer">Nattu is free. <a href="https://joelsalvin.vercel.app/" target="_blank" rel="noopener noreferrer">Made with <span aria-label="love">♥</span> by JS</a>.</footer>
+    </section>
+  </main>
+
+  <div class="distance-meter" aria-live="polite">Distance to your screen: 384,400 km</div>
+  <div id="sparkle-layer" aria-hidden="true"></div>
+  <script src="script.js" defer></script>
+</body>
+</html>
